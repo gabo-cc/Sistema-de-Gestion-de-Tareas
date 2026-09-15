@@ -1,13 +1,119 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>sistema-tareas</title>
+    <meta
+      name="description"
+      content="Sistema de gestión de tareas con TypeScript y Vite"
+    />
+    <title>Sistema de Gestión de Tareas</title>
   </head>
+
   <body>
-    <div id="app"></div>
+    <header class="app-header">
+      <div class="container">
+        <p class="eyebrow">Organización personal</p>
+        <h1>Mis tareas</h1>
+        <p>Organiza tus actividades y cumple tus objetivos.</p>
+      </div>
+    </header>
+
+    <main class="container app-layout">
+      <section class="panel">
+        <h2 id="form-title">Nueva tarea</h2>
+
+        <form id="task-form">
+          <input type="hidden" id="task-id" />
+
+          <label for="title">Título</label>
+          <input
+            id="title"
+            type="text"
+            maxlength="80"
+            placeholder="Ejemplo: Terminar el informe"
+            required
+          />
+
+          <label for="description">Descripción</label>
+          <textarea
+            id="description"
+            maxlength="300"
+            placeholder="Describe brevemente la actividad"
+            required
+          ></textarea>
+
+          <div class="form-grid">
+            <div>
+              <label for="category">Categoría</label>
+              <input
+                id="category"
+                type="text"
+                maxlength="40"
+                placeholder="Estudio, trabajo..."
+                required
+              />
+            </div>
+
+            <div>
+              <label for="priority">Prioridad</label>
+              <select id="priority" required>
+                <option value="baja">Baja</option>
+                <option value="media" selected>Media</option>
+                <option value="alta">Alta</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button id="submit-button" type="submit">Agregar tarea</button>
+
+            <button id="cancel-edit" class="secondary hidden" type="button">
+              Cancelar edición
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="tasks-section">
+        <div class="toolbar panel">
+          <input
+            id="search"
+            type="search"
+            placeholder="Buscar por título..."
+            aria-label="Buscar tareas por título"
+          />
+
+          <select id="status-filter" aria-label="Filtrar por estado">
+            <option value="all">Todas</option>
+            <option value="pending">Pendientes</option>
+            <option value="completed">Completadas</option>
+          </select>
+
+          <select id="priority-filter" aria-label="Filtrar por prioridad">
+            <option value="all">Todas las prioridades</option>
+            <option value="alta">Alta</option>
+            <option value="media">Media</option>
+            <option value="baja">Baja</option>
+          </select>
+        </div>
+
+        <div class="summary">
+          <h2>Lista de tareas</h2>
+          <span id="task-counter">0 tareas</span>
+        </div>
+
+        <div id="message" class="message hidden" role="status"></div>
+
+        <div id="task-list" class="task-list"></div>
+
+        <div id="empty-state" class="empty-state">
+          <h3>No hay tareas para mostrar</h3>
+          <p>Agrega una tarea o modifica los filtros seleccionados.</p>
+        </div>
+      </section>
+    </main>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
